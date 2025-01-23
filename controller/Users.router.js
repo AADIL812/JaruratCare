@@ -9,3 +9,5 @@ UserRouter.post('/create',httpcreateUser);
 UserRouter.get('/get/:id',httpgetUser);
 UserRouter.put('/update/:id',httpupdateUser);
 UserRouter.delete('/delete/:id',httpdeleteUser);
+
+module.exports={UserRouter};
