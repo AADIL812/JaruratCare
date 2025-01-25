@@ -1,6 +1,9 @@
 const Resource = require('./Resource.mongo');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+
+
+
 // Function to create a new user
 async function createUser(name, email, role,password) {
   try {
