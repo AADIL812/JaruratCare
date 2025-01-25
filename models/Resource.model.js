@@ -1,9 +1,12 @@
 const Resource = require('./Resource.mongo');
-
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 // Function to create a new user
-async function createUser(name, email, role) {
+async function createUser(name, email, role,password) {
   try {
-    const newUser = new Resource({ name, email, role });
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    console.log('Creating user:', name, email, role);
+    const newUser = new Resource({ name, email, role,password:hashedPassword });
     await newUser.save();
     console.log('User created successfully:', newUser);
     return newUser;
