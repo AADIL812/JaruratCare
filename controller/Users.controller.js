@@ -1,6 +1,6 @@
 const {getAllUsers,createUser,getUser,updateUser,deleteUser}=require('../models/Resource.model');
 const Resource = require('../models/Resource.mongo');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 async function httploginUser(req, res) {
     try {
