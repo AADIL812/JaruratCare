@@ -16,22 +16,20 @@ async function httploginUser(req, res) {
         return res.status(404).json({ error: 'Invalid email' });
       }
   
-      // Debug: Log user found in database
-      //console.log('User found:', user);
+      
   
-      // Compare provided password with hashed password in the database
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-  
-  
-      if (!isPasswordValid) {
-        return res.status(401).json({ error: 'Invalid password' });
-      }
-  
-      const token = jwt.sign(
-        { id: user._id, role: user.role },
-         'your_jwt_secret', 
-        { expiresIn: '1h' }
-      );
+      const isPasswordValid = bcrypt.compare(password, user.password);
+    const tokenPromise = jwt.sign(
+      { id: user._id, role: user.role },
+      'your_jwt_secret',
+      { expiresIn: '1h' }
+    );
+    if (!(await isPasswordValid)) {
+      return res.status(401).json({ error: 'Invalid password' });
+    }
+
+    // Generate token
+    const token = await tokenPromise;
   
       // Send success response with the token and user details
       res.status(200).json({
