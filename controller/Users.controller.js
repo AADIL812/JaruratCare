@@ -11,7 +11,7 @@ async function httploginUser(req, res) {
       }
   
       // Find user by email in the database
-      const user = await Resource.findOne({ email });
+      const user = await Resource.findOne({ email:1 });
       if (!user) {
         return res.status(404).json({ error: 'Invalid email' });
       }
